@@ -27,7 +27,7 @@ with st.sidebar:
     distance_metric = st.selectbox("距离度量", ["欧几里得", "曼哈顿"])
     K = st.number_input("聚类数量", 1, 100, 9, 1)
     max_iters = st.number_input("最大迭代次数", 1, 100000, 10000, 1000)
-    implementation = st.selectbox("实现方式", ["DLL", "Python"])
+    implementation = st.selectbox("实现方式", [".so", "Python"])
 
     if st.button("生成数据"):
         if data_mode == "模式1":
@@ -50,7 +50,7 @@ if st.session_state.data_generated:
     if st.button("开始聚类"):
         start_time = time.time()
 
-        if implementation == "DLL":
+        if implementation == ".so":
             if distance_metric == "欧几里得":
                 labels, centroids = k_means_euclid_c(st.session_state.dataX, K, max_iters)
             else:
