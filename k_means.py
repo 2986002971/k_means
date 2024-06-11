@@ -67,7 +67,7 @@ def k_means_manhattan_py(X, K, max_iters=10000):
     return labels, centroids
 
 
-lib = ctypes.cdll.LoadLibrary('./k_means_c.dll')
+lib = ctypes.cdll.LoadLibrary('./k_means_c.so')
 
 # Define the argument and return types
 lib.k_means_euclid.argtypes = [
