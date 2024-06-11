@@ -9,10 +9,10 @@ def k_means_euclid_py(X, K, max_iters=10000):
     centroids = X[np.random.choice(n_samples, K, replace=False)]
     labels = np.zeros(n_samples, dtype=np.int64)
 
-    for _ in range(max_iters):
+    for _ in prange(max_iters):
         for i in prange(n_samples):
             distances = np.zeros(K, dtype=np.float64)
-            for j in range(K):
+            for j in prange(K):
                 distances[j] = np.sqrt(np.sum((X[i] - centroids[j]) ** 2))
             labels[i] = np.argmin(distances)
 
@@ -23,7 +23,7 @@ def k_means_euclid_py(X, K, max_iters=10000):
             new_centroids[labels[i]] += X[i]
             counts[labels[i]] += 1
 
-        for k in range(K):
+        for k in prange(K):
             if counts[k] > 0:
                 new_centroids[k] /= counts[k]
 
@@ -41,10 +41,10 @@ def k_means_manhattan_py(X, K, max_iters=10000):
     centroids = X[np.random.choice(n_samples, K, replace=False)]
     labels = np.zeros(n_samples, dtype=np.int64)
 
-    for _ in range(max_iters):
+    for _ in prange(max_iters):
         for i in prange(n_samples):
             distances = np.zeros(K, dtype=np.float64)
-            for j in range(K):
+            for j in prange(K):
                 distances[j] = np.sum(np.abs(X[i] - centroids[j]))
             labels[i] = np.argmin(distances)
 
@@ -55,7 +55,7 @@ def k_means_manhattan_py(X, K, max_iters=10000):
             new_centroids[labels[i]] += X[i]
             counts[labels[i]] += 1
 
-        for k in range(K):
+        for k in prange(K):
             if counts[k] > 0:
                 new_centroids[k] /= counts[k]
 
